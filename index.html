@@ -246,6 +246,19 @@
             overflow: hidden;
             margin-bottom: 40vh;
         }
+        
+        @media screen and (max-width: 804px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                z-index: 2;
+                height: min-content;
+                position: relative;
+            }
+
+        }
     </style>
 </head>
 
