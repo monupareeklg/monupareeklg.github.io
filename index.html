@@ -246,7 +246,7 @@
             overflow: hidden;
             margin-bottom: 40vh;
         }
-        
+
         @media screen and (max-width: 804px) {
             .container {
                 grid-template-columns: 1fr;
@@ -269,6 +269,7 @@
                 <div class="profile">
                     <img class="profile-pic" id="profile-pic" alt="profile picture">
                     <div>
+                        <p>Hi 👋, I'm luv</p>
                         <p id="profile-description"></p>
                         <div class="social">
                             <a class="github" href=""></a>
@@ -537,7 +538,7 @@
                 document.getElementById('profile-pic').src = userData.avatar_url;
 
                 // Set profile description
-                const description = userData.bio || "Hi 👋, I'm luv\nI'm a full stack developer\nI love to code and learn new things";
+                const description = userData.bio || "I'm a full stack developer\nI love to code and learn new things";
                 document.getElementById('profile-description').innerText = description.replace(/\n/g, '\n');
 
                 // Fetch social accounts
