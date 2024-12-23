@@ -248,14 +248,33 @@
         }
 
         @media screen and (max-width: 804px) {
+            .sidebar{
+                margin: 0 auto;
+                width: 100%;
+                align-items: center;
+                padding: 10vh 0 0 0;
+            }
+
+            .skillcard h2{
+                font-size: 20px;
+            }
             .container {
                 grid-template-columns: 1fr;
+                margin: 5px;
             }
 
             .sidebar {
                 z-index: 2;
                 height: min-content;
                 position: relative;
+            }
+
+            .profile {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
             }
 
         }
