@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luv - Software Engineer</title>
+    <link rel="shortcut icon" href="luvicon.png" type="image/x-icon">
+
+    <style>
+        * {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --pc-centering: 20px;
+        }
+
+        body {
+            background-color: #09090B;
+            color: #e6e6e6;
+            font-family: monospace;
+            margin: 0;
+            padding: 0;
+        }
+
+        .slice-container {
+            border-top: 1px solid #242424;
+        }
+
+        .nav-container {
+            position: sticky;
+            top: 20px;
+            background-color: #09090B;
+            z-index: 100;
+            border-top: 1px solid #242424;
+            border-bottom: 1px solid #242424;
+        }
+
+        .logo {
+            height: 30px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 750px;
+            border-right: 1px solid #242424;
+            border-left: 1px solid #242424;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #808080;
+        }
+
+        nav ul li a:hover {
+            color: #e6e6e6;
+        }
+
+        .hero-logo {
+            height: 70px;
+        }
+
+        .dot-bg {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10vh 20px;
+            max-width: 750px;
+            margin: 0 auto;
+            border-right: 1px solid #242424;
+            border-left: 1px solid #242424;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            height: 150px;
+            max-width: calc(750px + 40px);
+            margin: 0 auto;
+            border-right: 1px solid #242424;
+            border-left: 1px solid #242424;
+        }
+
+        .pfp-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-right: 1px solid #242424;
+        }
+
+        .pfp-container img {
+            border-radius: 50%;
+            width: 100%;
+            height: 100%;
+            border: 1px solid #242424;
+        }
+
+        .profile-info-grid {
+            display: grid;
+            grid-template-rows: 10fr 5fr 3fr;
+        }
+
+        .profile-info-name {
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+        }
+
+        .profile-info-description {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+            color: #808080;
+            overflow: hidden;
+            height: 20px;
+        }
+
+        .section-change-slashes {
+            max-width: calc(750px + 40px);
+            margin: 0 auto;
+            border-right: 1px solid #242424;
+            border-left: 1px solid #242424;
+            height: 40px;
+        }
+
+        .section-change-slashes-small {
+            max-width: calc(750px + 40px);
+            margin: 0 auto;
+            border-right: 1px solid #242424;
+            border-left: 1px solid #242424;
+            height: 20px;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            max-width: calc(750px + 40px);
+            margin: 0 auto;
+            border-right: 1px solid #242424;
+            border-left: 1px solid #242424;
+            gap: 20px;
+        }
+
+        .social-card {
+            display: flex;
+            align-items: center;
+            border-right: 1px solid #242424;
+            padding: 10px;
+            gap: 10px;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .social-card:hover .social-card-text-title {
+            text-decoration: underline;
+        }
+
+        .social-card-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .social-card:last-child {
+            border-right: none;
+            border-left: 1px solid #242424;
+        }
+
+        .social-card-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-card-text {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .social-card-text-title {
+            font-size: 16px;
+            color: #ececec;
+        }
+
+        .social-card-text-username {
+            font-size: 14px;
+            color: #4c4c4c;
+        }
+
+        .social-card-icon-logo {
+            height: 50px;
+            aspect-ratio: 1/1;
+            border-radius: 17px;
+            background-size: 60%;
+            background-position: center;
+            background-repeat: no-repeat;
+            border: 1px solid #d3d3d3;
+        }
+
+        .section-change-slashes-small-divider {
+            height: 20px;
+            width: 20px;
+            border-right: 1px solid #242424;
+            border-left: 1px solid #242424;
+            margin: 0 auto;
+
+        }
+
+        .section-title {
+            font-size: 30px;
+            font-weight: 300;
+            display: flex;
+            padding: 0 20px;
+            align-items: center;
+            border-right: 1px solid #242424;
+            border-left: 1px solid #242424;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            font-size: 14px;
+            display: flex;
+            padding: 20px;
+            align-items: center;
+            border-right: 1px solid #242424;
+            border-left: 1px solid #242424;
+            max-width: 750px;
+            margin: 0 auto;
+            line-height: 2;
+            color: #bebebe;
+        }
+
+        .techtools {
+            height: 40px;
+        }
+
+        .role-carousel {
+            position: relative;
+            height: 20px;
+            overflow: hidden;
+        }
+
+        .role-carousel-inner {
+            display: flex;
+            flex-direction: column;
+            animation: slideUp 9s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+        }
+
+        .role-slide {
+            height: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        @keyframes slideUp {
+
+            0%,
+            30% {
+                transform: translateY(0);
+            }
+
+            33%,
+            63% {
+                transform: translateY(-20px);
+            }
+
+            66%,
+            96% {
+                transform: translateY(-40px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .dot-bg {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dot-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(#404040 1px, transparent 1px);
+            background-size: 12px 12px;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .hero-logo {
+            position: relative;
+            z-index: 2;
+        }
+
+        .user-data {
+            max-width: 750px;
+            margin: 0 auto;
+            border-right: 1px solid #242424;
+            border-left: 1px solid #242424;
+            padding: 20px;
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+        }
+
+        .data-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .data-item-symbol {
+            height: 20px;
+            filter: invert(1);
+            padding: 4px;
+            background-color: #e7e7e7;
+            border-radius: 11px;
+            border: 1px solid #c8c8c8;
+            opacity: 0.5;
+        }
+
+        .data-item-text {
+            font-size: 14px;
+            color: #bebebe;
+        }
+
+        .data-item-Link {
+            text-decoration: none;
+            color: #bebebe;
+        }
+
+        .data-item-Link:hover {
+            text-decoration: underline;
+        }
+
+        .expirence-container {
+            max-width: 750px;
+            margin: 0 auto;
+            border-right: 1px solid #242424;
+            border-left: 1px solid #242424;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .company-logo {
+            height: 30px;
+        }
+
+        .expirence-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .company-name {
+            font-size: 16px;
+            color: #bebebe;
+        }
+
+        .expirence-position {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .job-role {
+            font-size: 16px;
+            color: #bebebe;
+        }
+
+        .job-duration {
+            font-size: 11px;
+            color: #bebebe;
+        }
+
+        .role-data {
+            display: grid;
+            grid-template-columns: 30px 1fr;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .expirence-position:hover .job-role {
+            text-decoration: underline;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .skill-item {
+            font-size: 12px;
+            color: #bebebe;
+            background-color: #111111;
+            padding: 3px 7px;
+            border: 1px solid #333333;
+            border-radius: 7px;
+        }
+
+        .job-description {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out, margin 0.3s ease-in-out;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .job-description.active {
+            max-height: 500px;
+            opacity: 1;
+            margin-top: 10px;
+        }
+
+        .job-description ul {
+            list-style: disc;
+            margin-left: 20px;
+        }
+
+        .job-description li {
+            font-size: 13px;
+            color: #bebebe;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .arrow-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .arrow-icon.active {
+            transform: rotate(180deg);
+        }
+
+        .threedobject {
+            height: 40px;
+            aspect-ratio: 1 / 1;
+        }
+
+        .active-nav {
+            color: #ffffff;
+        }
+
+        .logo-hidden {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .stack-flex {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 750px;
+            margin: 0 auto;
+            border-right: 1px solid #242424;
+            border-left: 1px solid #242424;
+            gap: 20px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stack-flex::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(#404040 1px, transparent 1px);
+            background-size: 12px 12px;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .techtools {
+            position: relative;
+            z-index: 2;
+        }
+
+        @media screen and (max-width: 770px) {
+
+            nav,
+            .expirence-container,
+            .user-data,
+            .stack-flex,
+            .section-title,
+            .profile-grid,
+            .section-change-slashes,
+            .dot-grid,
+            footer,
+            .about-text,
+            .section-change-contact-form,
+            .dot-bg {
+                margin: 0 10px !important;
+            }
+
+        }
+
+        @media screen and (max-width: 628px) {
+
+            nav ul {
+                display: none;
+            }
+
+            .social-grid {
+                grid-template-columns: 1fr;
+                border-right: none;
+                border-left: none;
+            }
+
+            .social-card {
+                border-right: none;
+                border-top: 1px solid #242424;
+                border-bottom: 1px solid #242424;
+            }
+
+            .section-change-slashes-small-divider {
+                display: none;
+            }
+
+            .expirence-container {
+                overflow: hidden;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div style="height: 20px; background-color: #09090B; position: sticky; top: 0; z-index: 100;"></div>
+    <div class="slice-container nav-container">
+        <nav>
+            <img src="logo.png" class="logo" alt="Luv Logo">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <ul>
+                    <li><a href="#home" class="active-nav">Me</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#stack">Stack</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="threedobject"></div>
+                <script type="module">
+                    import * as THREE from "https://esm.sh/three@0.160.0";
+                    import { GLTFLoader } from "https://esm.sh/three@0.160.0/examples/jsm/loaders/GLTFLoader.js";
+
+                    const container = document.querySelector('.threedobject');
+
+                    const scene = new THREE.Scene();
+                    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+                    camera.position.z = 0.4;
+
+                    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+                    renderer.setSize(container.clientWidth, container.clientHeight);
+                    container.appendChild(renderer.domElement);
+
+                    const light = new THREE.HemisphereLight(0xffffff, 0x444444);
+                    light.position.set(0, 1, 0);
+                    scene.add(light);
+
+                    const loader = new GLTFLoader();
+                    loader.load('D.glb', (gltf) => {
+                        const model = gltf.scene;
+                        model.scale.set(0.2, 0.2, 0.2);
+                        scene.add(model);
+
+                        // Sync with scroll
+                        function onScroll() {
+                            const scrollY = window.scrollY || window.pageYOffset;
+                            model.rotation.x = scrollY * 0.001;
+                            model.rotation.y = scrollY * 0.001;
+                            model.rotation.z = scrollY * 0.001;
+                            renderer.render(scene, camera);
+                        }
+
+                        // Initial render
+                        onScroll();
+
+                        // Listen to scroll
+                        window.addEventListener('scroll', onScroll);
+
+                        // Optional: keep updating size on resize
+                        window.addEventListener('resize', () => {
+                            camera.aspect = container.clientWidth / container.clientHeight;
+                            camera.updateProjectionMatrix();
+                            renderer.setSize(container.clientWidth, container.clientHeight);
+                            renderer.render(scene, camera);
+                        });
+                    }, undefined, (err) => console.error(err));
+                </script>
+            </div>
+        </nav>
+    </div>
+    <div id="home" class="slice-container" style="border-top: none;">
+        <div class="dot-bg">
+            <div class="dot-grid"></div>
+            <img src="logo.png" class="hero-logo" alt="Luv Logo">
+        </div>
+    </div>
+
+    <div class="slice-container">
+        <div class="profile-grid">
+            <div class="pfp-container"><img
+                    src="https://raw.githubusercontent.com/anjalichavan3D/portfolio/main/asset/hb_doodle.jpg" alt="">
+            </div>
+            <div class="profile-info-grid">
+                <div style="font-size: 14px; color: #414141;display: flex;align-items: end; padding-left: 20px;">
+                    HACKER-BOY-404</div>
+                <div class="slice-container profile-info-name">Luv PareeK</div>
+                <div class="slice-container profile-info-description">
+                    <div class="role-carousel">
+                        <div class="role-carousel-inner">
+                            <div class="role-slide">Software Engineer</div>
+                            <div class="role-slide">Ethical Hacker</div>
+                            <div class="role-slide">Web Developer</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .slashed-container {
+            position: relative;
+            width: 100%;
+            background-image: repeating-linear-gradient(45deg,
+                    transparent,
+                    transparent 9px,
+                    #1d1d1d 10px,
+                    #1d1d1d 10.1px);
+            animation: moveStripes 10s linear infinite;
+        }
+
+        @keyframes moveStripes {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 100px 0;
+            }
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+
+    <div class="slice-container slashed-container">
+        <div class="section-change-slashes"></div>
+    </div>
+
+    <div class="slice-container">
+        <div class="user-data">
+            <div class="data-item">
+                <img src="https://www.svgrepo.com/show/533324/code.svg" alt="" class="data-item-symbol">
+                <div class="data-item-text">Team Lead at <a href="https://www.technoloader.com/"
+                        class="data-item-Link">@Technoloader</a></div>
+            </div>
+            <div class="data-item">
+                <img src="https://www.svgrepo.com/show/438629/idea.svg" alt="" class="data-item-symbol">
+                <div class="data-item-text">Founder, <a href="https://www.npmjs.com/package/trade-data-generator"
+                        class="data-item-Link">@trade-data-generator</a></div>
+            </div>
+            <div class="data-item">
+                <img src="https://www.svgrepo.com/show/532539/location-pin.svg" alt="" class="data-item-symbol">
+                <div class="data-item-text">Rajasthan, India</div>
+            </div>
+            <div class="data-item">
+                <img src="https://www.svgrepo.com/show/533285/phone.svg" alt="" class="data-item-symbol">
+                <a href="tel:+919876543210" class="data-item-Link">+91 9876543210</a>
+            </div>
+            <div class="data-item">
+                <img src="https://www.svgrepo.com/show/533200/mail-alt-3.svg" alt="" class="data-item-symbol">
+                <a href="mailto:monupareeklg@gmail.com" class="data-item-Link">monupareeklg@gmail.com</a>
+            </div>
+            <div class="data-item">
+                <img src="https://www.svgrepo.com/show/532866/link-alt.svg" alt="" class="data-item-symbol">
+                <a href="https://luvpareek.com" class="data-item-Link">luvpareek.com</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="slice-container slashed-container">
+        <div class="section-change-slashes"></div>
+    </div>
+
+    <div class="slice-container">
+        <div class="social-grid">
+
+            <a href="https://www.linkedin.com/in/love-pareek-376ba1157/" target="_blank" class="social-card">
+                <div class="social-card-container">
+                    <div class="social-card-icon">
+                        <div class="social-card-icon-logo"
+                            style="background-image: url(https://www.svgrepo.com/show/512419/linkedin-161.svg); background-color: rgb(255, 162, 31); filter: invert(1);">
+                        </div>
+                    </div>
+                    <div class="social-card-text">
+                        <div class="social-card-text-title">LinkedIn</div>
+                        <div class="social-card-text-username">love-pareek-376ba1157</div>
+                    </div>
+                </div>
+                <img src="https://www.svgrepo.com/show/533642/arrow-up-right.svg"
+                    style="height: 20px; width: 20px; filter: invert(0.7);" alt="">
+            </a>
+            <a href="https://github.com/monupareeklg" target="_blank" class="social-card">
+                <div class="social-card-container">
+                    <div class="social-card-icon">
+                        <div class="social-card-icon-logo"
+                            style="background-image: url(https://www.svgrepo.com/show/512317/github-142.svg); background-color: rgb(255, 255, 255); filter: invert(1);">
+                        </div>
+                    </div>
+                    <div class="social-card-text">
+                        <div class="social-card-text-title">Github</div>
+                        <div class="social-card-text-username">monupareeklg</div>
+                    </div>
+                </div>
+                <img src="https://www.svgrepo.com/show/533642/arrow-up-right.svg"
+                    style="height: 20px; width: 20px; filter: invert(0.7);" alt="">
+            </a>
+
+        </div>
+    </div>
+    <div class="slice-container">
+        <div class="section-change-slashes-small">
+            <div class="section-change-slashes-small-divider"></div>
+        </div>
+    </div>
+    <div class="slice-container">
+        <div class="social-grid">
+
+            <a target="_blank" class="social-card">
+                <div class="social-card-container">
+                    <div class="social-card-icon">
+                        <div class="social-card-icon-logo"
+                            style="background-image: url(https://www.svgrepo.com/show/341985/leetcode.svg); background-color: rgb(246, 246, 246); filter: invert(1);">
+                        </div>
+                    </div>
+                    <div class="social-card-text">
+                        <div class="social-card-text-title">Leetcode</div>
+                        <div class="social-card-text-username">love-pareek-376ba1157</div>
+                    </div>
+                </div>
+                <img src="https://www.svgrepo.com/show/533642/arrow-up-right.svg"
+                    style="height: 20px; width: 20px; filter: invert(0.7);" alt="">
+            </a>
+            <a target="_blank" class="social-card">
+                <div class="social-card-container">
+                    <div class="social-card-icon">
+                        <div class="social-card-icon-logo"
+                            style="background-image: url(https://www.svgrepo.com/show/499596/doc-paper.svg); background-color: rgb(255, 255, 255); filter: invert(1);">
+                        </div>
+                    </div>
+                    <div class="social-card-text">
+                        <div class="social-card-text-title">Resume</div>
+                        <div class="social-card-text-username">love-pareek</div>
+                    </div>
+                </div>
+                <img src="https://www.svgrepo.com/show/533642/arrow-up-right.svg"
+                    style="height: 20px; width: 20px; filter: invert(0.7);" alt="">
+            </a>
+
+        </div>
+    </div>
+
+    <div class="slice-container slashed-container">
+        <div class="section-change-slashes"></div>
+    </div>
+    <div class="slice-container">
+        <div class="section-title">
+            About
+        </div>
+    </div>
+    <div id="about" class="slice-container">
+        <div class="about-text">
+            Hello, World! I am Luv Pareek — a Software Engineer & Ethical Hacker passionate about creating
+            secure, efficient, and innovative software solutions. <br><br>
+
+            With expertise in web development and cybersecurity, I focus on building robust applications
+            while ensuring they remain protected against potential vulnerabilities. I enjoy working with
+            modern technologies and frameworks to deliver exceptional user experiences. <br><br>
+
+            I'm constantly expanding my knowledge in software engineering, ethical hacking, and web development,
+            applying these skills to create impactful solutions for real-world problems. <br><br>
+
+            Feel free to reach out if you're interested in collaborating on exciting projects!
+        </div>
+    </div>
+
+    <div class="slice-container slashed-container">
+        <div class="section-change-slashes"></div>
+    </div>
+
+    <div class="slice-container">
+        <div class="section-title">
+            Stack
+        </div>
+    </div>
+
+    <div id="stack" class="slice-container">
+
+        <div class="stack-flex">
+            <!-- Frameworks -->
+            <img src="https://icon.icepanel.io/Technology/svg/React.svg" alt="ReactJS" class="techtools">
+            <img src="https://icon.icepanel.io/Technology/svg/Redux.svg" alt="ReduxJS" class="techtools">
+            <img src="https://icon.icepanel.io/Technology/svg/Node.js.svg" alt="NodeJS" class="techtools">
+            <img src="https://img.icons8.com/fluent-systems-filled/200/FFFFFF/nextjs.png" alt="NextJS"
+                class="techtools">
+            <img src="https://icon.icepanel.io/Technology/svg/Nest.js.svg" alt="NestJS" class="techtools">
+
+            <!-- Databases -->
+            <img src="https://icon.icepanel.io/Technology/svg/MongoDB.svg" alt="MongoDB" class="techtools">
+            <img src="https://icon.icepanel.io/Technology/svg/MySQL.svg" alt="MySQL" class="techtools">
+            <img src="https://icon.icepanel.io/Technology/svg/Firebase.svg" alt="Firebase" class="techtools">
+
+            <!-- DevOps -->
+            <img src="https://icon.icepanel.io/Technology/svg/Docker.svg" alt="Docker" class="techtools">
+            <img src="https://icon.icepanel.io/Technology/svg/Kubernetes.svg" alt="Kubernetes" class="techtools">
+            <img src="https://icon.icepanel.io/Technology/svg/Jenkins.svg" alt="CI/CD" class="techtools">
+
+            <!-- Version Control -->
+            <img src="https://img.icons8.com/ios11/512/FFFFFF/github.png" alt="GitHub" class="techtools">
+            <img src="https://icon.icepanel.io/Technology/svg/Git.svg" alt="Git" class="techtools">
+            <img src="https://icon.icepanel.io/Technology/svg/BitBucket.svg" alt="BitBucket" class="techtools">
+
+            <!-- Other Technologies -->
+            <img src="https://icon.icepanel.io/Technology/svg/Socket.io.svg" style="filter: invert(1);" alt="Socket.io"
+                class="techtools">
+            <img src="https://icon.icepanel.io/Technology/svg/AWS.svg" alt="AWS" class="techtools">
+            <img src="https://icon.icepanel.io/Technology/svg/Heroku.svg" alt="Heroku" class="techtools">
+
+            <img src="https://icon.icepanel.io/Technology/png-shadow-512/Unity.png" alt="Unity" class="techtools">
+        </div>
+    </div>
+
+    <div class="slice-container slashed-container">
+        <div class="section-change-slashes"></div>
+    </div>
+
+
+    <div class="slice-container">
+        <div class="section-title">
+            Experience
+        </div>
+    </div>
+    <div id="experience" class="slice-container">
+        <div class="expirence-container">
+            <div class="expirence-title">
+                <img src="technoloader.png" alt="" class="company-logo">
+                <div class="company-name">Technoloader Pvt Ltd</div>
+            </div>
+            <div class="expirence-position">
+                <div class="role-data">
+                    <img src="https://www.svgrepo.com/show/533324/code.svg" alt="" class="data-item-symbol">
+                    <div class="job-role">Team Lead</div>
+                    <div></div>
+                    <div class="job-duration">Full Time | 09/2020 - present</div>
+                </div>
+                <img src="https://www.svgrepo.com/show/428133/down-arrow2.svg" height="16px" style="filter: invert(1);"
+                    alt="" class="arrow-icon">
+            </div>
+
+            <div class="job-description">
+                <ul>
+                    <li>Lead a team of 10+ developers to build and maintain the company's flagship product, a
+                        comprehensive platform for managing and analyzing data in the financial services industry.</li>
+                    <li>Developed and maintained a custom CMS for the company's website, allowing for easy updates and
+                        management of content.</li>
+                    <li>Collaborated with the design team to create a user-friendly interface for the company's
+                        platform, ensuring a seamless user experience.</li>
+
+                </ul>
+                <div class="skills">
+                    <div class="skill-item">React</div>
+                    <div class="skill-item">Node.js</div>
+                    <div class="skill-item">MongoDB</div>
+                    <div class="skill-item">MySQL</div>
+                    <div class="skill-item">Firebase</div>
+                    <div class="skill-item">Docker</div>
+                    <div class="skill-item">Kubernetes</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slice-container slashed-container">
+        <div class="section-change-slashes"></div>
+    </div>
+
+    <div id="projects" class="slice-container">
+        <div class="section-title">
+            Projects
+        </div>
+        <div class="github-render">
+            <div id="github-projects-container">
+                <!-- Projects will be loaded here -->
+                <div class="loading-indicator">Loading projects from GitHub...</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Function to fetch GitHub repositories with caching
+            async function fetchGitHubProjects() {
+                try {
+                    // Check if we have cached data and it's still valid (less than 1 day old)
+                    const cachedData = localStorage.getItem('githubReposCache');
+                    const cacheTimestamp = localStorage.getItem('githubReposCacheTimestamp');
+
+                    const now = new Date().getTime();
+                    const oneDayInMs = 24 * 60 * 60 * 1000; // 1 day in milliseconds
+
+                    // If we have valid cached data, use it
+                    if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp) < oneDayInMs)) {
+                        console.log('Using cached GitHub repositories data');
+                        return JSON.parse(cachedData);
+                    }
+
+                    // Otherwise fetch fresh data
+                    console.log('Fetching fresh GitHub repositories data');
+                    const response = await fetch('https://api.github.com/users/monupareeklg/repos?sort=updated&per_page=6');
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch repositories');
+                    }
+                    const repos = await response.json();
+
+                    // Cache the data
+                    localStorage.setItem('githubReposCache', JSON.stringify(repos));
+                    localStorage.setItem('githubReposCacheTimestamp', now.toString());
+
+                    return repos;
+                } catch (error) {
+                    console.error('Error fetching GitHub repositories:', error);
+                    // Try to use cached data even if it's older than 1 day in case of error
+                    const cachedData = localStorage.getItem('githubReposCache');
+                    if (cachedData) {
+                        console.log('Using cached data due to fetch error');
+                        return JSON.parse(cachedData);
+                    }
+                    return [];
+                }
+            }
+
+            // Function to format date
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit'
+                });
+            }
+
+            // Function to render repositories
+            async function renderGitHubProjects() {
+                const container = document.getElementById('github-projects-container');
+                const repos = await fetchGitHubProjects();
+
+                if (repos.length === 0) {
+                    container.innerHTML = '<div class="slice-container"><div class="expirence-container">No repositories found or error loading data.</div></div>';
+                    return;
+                }
+
+                let projectsHTML = '';
+
+                repos.forEach(repo => {
+                    // Extract topics/languages as skills
+                    let skills = [];
+                    if (repo.language) {
+                        skills.push(repo.language);
+                    }
+
+                    // Determine if this repo should be open by default based on description
+                    const hasDescription = repo.description && repo.description.trim() !== '';
+                    const descriptionClass = hasDescription ? 'job-description active' : 'job-description';
+                    const arrowClass = hasDescription ? 'arrow-icon active' : 'arrow-icon';
+
+                    projectsHTML += `
+                    <div class="slice-container">
+                        <div class="expirence-container">
+                            <div class="expirence-position">
+                                <div class="role-data">
+                                    <img src="https://www.svgrepo.com/show/533324/code.svg" alt="" class="data-item-symbol">
+                                    <div class="job-role">${repo.name}</div>
+                                    <div></div>
+                                    <div class="job-duration">Creation Date: ${formatDate(repo.created_at)}</div>
+                                </div>
+                                <img src="https://www.svgrepo.com/show/428133/down-arrow2.svg" height="16px"
+                                    style="filter: invert(1);" alt="" class="${arrowClass}">
+                            </div>
+
+                            <div class="${descriptionClass}">
+                                <ul>
+                                    <li>${repo.description || 'No description available.'}</li>
+                                    <li>Last updated: ${formatDate(repo.updated_at)}</li>
+                                    <li><a href="${repo.html_url}" target="_blank" class="data-item-Link">View on GitHub</a></li>
+                                </ul>
+                                <div class="skills">
+                                    ${repo.language ? `<div class="skill-item">${repo.language}</div>` : ''}
+                                    ${repo.stargazers_count > 0 ? `<div class="skill-item">Stars: ${repo.stargazers_count}</div>` : ''}
+                                    ${repo.forks_count > 0 ? `<div class="skill-item">Forks: ${repo.forks_count}</div>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                });
+
+                container.innerHTML = projectsHTML;
+
+                // Add event listeners to the newly created elements
+                const expPositions = document.querySelectorAll('.expirence-position');
+                expPositions.forEach(position => {
+                    position.addEventListener('click', function () {
+                        const description = this.nextElementSibling;
+                        const arrow = this.querySelector('.arrow-icon');
+                        description.classList.toggle('active');
+                        arrow.classList.toggle('active');
+                    });
+                });
+            }
+
+            // Call the render function
+            renderGitHubProjects();
+        });
+    </script>
+
+    <div class="slice-container slashed-container">
+        <div class="section-change-slashes"></div>
+    </div>
+    <div id="contact" class="slice-container">
+        <div class="section-title">
+            Text mE
+        </div>
+    </div>
+    <div id="contact" class="slice-container">
+        <div class="section-change-contact-form" id="formContainer">
+            <form id="reviewForm">
+                <label>Email</label>
+                <input type="email" name="email" id="email" placeholder="Enter your email" required>
+    
+                <label>Message</label>
+                <textarea name="message" id="message" cols="10" rows="1" placeholder="Enter your message"
+                    required></textarea>
+    
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('reviewForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+    
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+    
+            const formData = new URLSearchParams();
+            formData.append("email", email);
+            formData.append("message", message);
+    
+            // Disable the button here
+            const sendButton = document.querySelector('#reviewForm button[type="submit"]');
+            sendButton.disabled = true;
+            sendButton.textContent = 'Sending...';
+
+            fetch('https://script.google.com/macros/s/AKfycbxnOvocka2sPZswrHA0MJkgCbpjPM2x_FSGZvwx80q-46oeQADkE54xAWp9wpAehSvt/exec', {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors'
+            })
+            .then(() => {
+                // Replace form with success message
+                const formContainer = document.getElementById('formContainer');
+                formContainer.innerHTML = `
+                    <div style="text-align: center; padding: 20px;">
+                        <p style="color: #4CAF50; font-weight: bold; font-size: 1.5em; margin-bottom: 10px;">Message Sent Successfully! 🎉</p>
+                        <p style="color: #808080; font-size: 1.1em;">Thank you for reaching out!</p>
+                        <p style="color: #808080; font-size: 1.1em;">I'll get back to you as soon as possible.</p>
+                    </div>`;
+            })
+            .catch(() => {
+                alert('Failed to send message. Please try again.');
+                // Re-enable the button if sending failed
+                sendButton.disabled = false;
+                sendButton.textContent = 'Send';
+            });
+        });
+    </script>
+    
+
+
+
+    <style>
+        .section-change-contact-form {
+            max-width: 750px;
+            margin: 0 auto;
+            border-right: 1px solid #242424;
+            border-left: 1px solid #242424;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .section-change-contact-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .section-change-contact-form input,
+        .section-change-contact-form textarea {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #242424;
+            background-color: #111111;
+            color: #ececec;
+        }
+
+        .section-change-contact-form button {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: #242424;
+            color: #ececec;
+            cursor: pointer;
+        }
+
+        .section-change-contact-form button:hover {
+            background-color: #333333;
+        }
+
+        .section-change-contact-form Label {
+            font-size: 14px;
+            color: #bebebe;
+        }
+
+        .section-change-contact-form textarea {
+            resize: none;
+            height: 100px;
+        }
+
+        .section-change-contact-form button:disabled {
+            background-color: #555555;
+            cursor: not-allowed;
+        }
+    </style>
+
+    <style>
+        footer {
+            max-width: 750px;
+            margin: 0 auto;
+            gap: 5px;
+            padding: 20px;
+            color: #808080;
+            font-size: 14px;
+            font-weight: 500;
+            border-right: 1px solid #242424;
+            border-left: 1px solid #242424;
+        }
+
+        .footer-text {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
+    <div class="slice-container">
+        <footer>
+            <div class="footer-text">Made for <img src="https://jatin0jha.github.io/asset/heart.svg"
+                    style="height: 16px; filter: invert(1);" alt=""></div>
+        </footer>
+    </div>
+
+    <div class="slice-container" style="height: 20px;"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Section IDs in the order they appear
+            const sectionIds = ['home', 'about', 'stack', 'experience', 'projects', 'contact'];
+            const navLinks = Array.from(document.querySelectorAll('nav ul li a'));
+
+            // Get section elements
+            const sections = sectionIds.map(id => document.getElementById(id));
+
+            function onScroll() {
+                let currentSection = sectionIds[0]; // Default to first section
+                let scrollPosition = window.scrollY + 100; // Offset for sticky nav
+
+                for (let i = 0; i < sections.length; i++) {
+                    const section = sections[i];
+                    if (section && section.offsetTop <= scrollPosition) {
+                        currentSection = sectionIds[i];
+                    }
+                }
+
+                navLinks.forEach(link => {
+                    if (link.getAttribute('href') === '#' + currentSection) {
+                        link.classList.add('active-nav');
+                    } else {
+                        link.classList.remove('active-nav');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', onScroll);
+            onScroll(); // Initial call
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const logo = document.querySelector('nav .logo');
+            const homeSection = document.getElementById('home');
+
+            function toggleLogoVisibility() {
+                // Get the bottom position of the home section relative to the viewport
+                const homeBottom = homeSection.getBoundingClientRect().bottom;
+
+                // If the bottom of the home section is above the nav, show the logo
+                if (homeBottom <= 100) {
+                    logo.classList.remove('logo-hidden');
+                } else {
+                    logo.classList.add('logo-hidden');
+                }
+            }
+
+            window.addEventListener('scroll', toggleLogoVisibility);
+            toggleLogoVisibility(); // Initial check
+        });
+    </script>
+
+</body>
+
+</html>
