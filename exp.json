@@ -1,0 +1,22 @@
+[
+    {
+        "companyName": "Technoloader Pvt Ltd",
+        "companyLogo": "technoloader.png",
+        "position": "Team Lead",
+        "duration": "Full Time | 09/2020 - present",
+        "description": [
+            "Lead a team of 10+ developers to build and maintain the company's flagship product, a comprehensive platform for managing and analyzing data in the financial services industry.",
+            "Developed and maintained a custom CMS for the company's website, allowing for easy updates and management of content.",
+            "Collaborated with the design team to create a user-friendly interface for the company's platform, ensuring a seamless user experience."
+        ],
+        "skills": [
+            "React",
+            "Node.js",
+            "MongoDB",
+            "MySQL",
+            "Firebase",
+            "Docker",
+            "Kubernetes"
+        ]
+    }
+]
