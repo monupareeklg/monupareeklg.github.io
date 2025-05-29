@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luv - Software Engineer</title>
     <link rel="shortcut icon" href="luvicon.png" type="image/x-icon">
-
     <style>
         * {
             scroll-behavior: smooth;
@@ -706,7 +705,7 @@
             </div>
             <div class="data-item">
                 <img src="https://www.svgrepo.com/show/532866/link-alt.svg" alt="" class="data-item-symbol">
-                <a href="https://luvpareek.com" class="data-item-Link">luvpareek.com</a>
+                <a href="https://monupareeklg.github.io/" class="data-item-Link">monupareeklg.github.io</a>
             </div>
 
         </div>
@@ -759,7 +758,7 @@
     <div class="slice-container">
         <div class="social-grid">
 
-            <a target="_blank" class="social-card">
+            <a href="https://leetcode.com/u/HB404/" target="_blank" class="social-card">
                 <div class="social-card-container">
                     <div class="social-card-icon">
                         <div class="social-card-icon-logo"
@@ -774,7 +773,7 @@
                 <img src="https://www.svgrepo.com/show/533642/arrow-up-right.svg"
                     style="height: 20px; width: 20px; filter: invert(0.7);" alt="">
             </a>
-            <a target="_blank" class="social-card">
+            <a href="LovePareekDoc.pdf" target="_blank" class="social-card">
                 <div class="social-card-container">
                     <div class="social-card-icon">
                         <div class="social-card-icon-logo"
@@ -874,183 +873,88 @@
         </div>
     </div>
     <div id="experience" class="slice-container">
-        <div class="expirence-container">
-            <div class="expirence-title">
-                <img src="technoloader.png" alt="" class="company-logo">
-                <div class="company-name">Technoloader Pvt Ltd</div>
-            </div>
-            <div class="expirence-position">
-                <div class="role-data">
-                    <img src="https://www.svgrepo.com/show/533324/code.svg" alt="" class="data-item-symbol">
-                    <div class="job-role">Team Lead</div>
-                    <div></div>
-                    <div class="job-duration">Full Time | 09/2020 - present</div>
-                </div>
-                <img src="https://www.svgrepo.com/show/428133/down-arrow2.svg" height="16px" style="filter: invert(1);"
-                    alt="" class="arrow-icon">
-            </div>
-
-            <div class="job-description">
-                <ul>
-                    <li>Lead a team of 10+ developers to build and maintain the company's flagship product, a
-                        comprehensive platform for managing and analyzing data in the financial services industry.</li>
-                    <li>Developed and maintained a custom CMS for the company's website, allowing for easy updates and
-                        management of content.</li>
-                    <li>Collaborated with the design team to create a user-friendly interface for the company's
-                        platform, ensuring a seamless user experience.</li>
-
-                </ul>
-                <div class="skills">
-                    <div class="skill-item">React</div>
-                    <div class="skill-item">Node.js</div>
-                    <div class="skill-item">MongoDB</div>
-                    <div class="skill-item">MySQL</div>
-                    <div class="skill-item">Firebase</div>
-                    <div class="skill-item">Docker</div>
-                    <div class="skill-item">Kubernetes</div>
-                </div>
-            </div>
-        </div>
+        <!-- Static experience card content removed. Dynamic content will be loaded here. -->
     </div>
 
-    <div class="slice-container slashed-container">
-        <div class="section-change-slashes"></div>
-    </div>
-
-    <div id="projects" class="slice-container">
-        <div class="section-title">
-            Projects
-        </div>
-        <div class="github-render">
-            <div id="github-projects-container">
-                <!-- Projects will be loaded here -->
-                <div class="loading-indicator">Loading projects from GitHub...</div>
-            </div>
-        </div>
-    </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Function to fetch GitHub repositories with caching
-            async function fetchGitHubProjects() {
-                try {
-                    // Check if we have cached data and it's still valid (less than 1 day old)
-                    const cachedData = localStorage.getItem('githubReposCache');
-                    const cacheTimestamp = localStorage.getItem('githubReposCacheTimestamp');
-
-                    const now = new Date().getTime();
-                    const oneDayInMs = 24 * 60 * 60 * 1000; // 1 day in milliseconds
-
-                    // If we have valid cached data, use it
-                    if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp) < oneDayInMs)) {
-                        console.log('Using cached GitHub repositories data');
-                        return JSON.parse(cachedData);
-                    }
-
-                    // Otherwise fetch fresh data
-                    console.log('Fetching fresh GitHub repositories data');
-                    const response = await fetch('https://api.github.com/users/monupareeklg/repos?sort=updated&per_page=6');
+            fetch('exp.json')
+                .then(response => {
                     if (!response.ok) {
-                        throw new Error('Failed to fetch repositories');
+                        throw new Error(`HTTP error! status: ${response.status}`);
                     }
-                    const repos = await response.json();
-
-                    // Cache the data
-                    localStorage.setItem('githubReposCache', JSON.stringify(repos));
-                    localStorage.setItem('githubReposCacheTimestamp', now.toString());
-
-                    return repos;
-                } catch (error) {
-                    console.error('Error fetching GitHub repositories:', error);
-                    // Try to use cached data even if it's older than 1 day in case of error
-                    const cachedData = localStorage.getItem('githubReposCache');
-                    if (cachedData) {
-                        console.log('Using cached data due to fetch error');
-                        return JSON.parse(cachedData);
+                    return response.json();
+                })
+                .then(data => {
+                    const mainExperienceDiv = document.getElementById('experience');
+                    if (!mainExperienceDiv) {
+                        console.error('Error: Target element #experience not found.');
+                        return;
                     }
-                    return [];
-                }
-            }
+                    mainExperienceDiv.innerHTML = ''; // Clear any placeholder content
 
-            // Function to format date
-            function formatDate(dateString) {
-                const date = new Date(dateString);
-                return date.toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit'
-                });
-            }
+                    data.forEach(exp => {
+                        const experienceContainer = document.createElement('div');
+                        experienceContainer.classList.add('expirence-container');
 
-            // Function to render repositories
-            async function renderGitHubProjects() {
-                const container = document.getElementById('github-projects-container');
-                const repos = await fetchGitHubProjects();
+                        let descriptionHTML = '<ul>';
+                        exp.description.forEach(desc => {
+                            descriptionHTML += `<li>${desc}</li>`;
+                        });
+                        descriptionHTML += '</ul>';
 
-                if (repos.length === 0) {
-                    container.innerHTML = '<div class="slice-container"><div class="expirence-container">No repositories found or error loading data.</div></div>';
-                    return;
-                }
+                        let skillsHTML = '<div class="skills">';
+                        exp.skills.forEach(skill => {
+                            skillsHTML += `<div class="skill-item">${skill}</div>`;
+                        });
+                        skillsHTML += '</div>';
 
-                let projectsHTML = '';
-
-                repos.forEach(repo => {
-                    // Extract topics/languages as skills
-                    let skills = [];
-                    if (repo.language) {
-                        skills.push(repo.language);
-                    }
-
-                    // Determine if this repo should be open by default based on description
-                    const hasDescription = repo.description && repo.description.trim() !== '';
-                    const descriptionClass = hasDescription ? 'job-description active' : 'job-description';
-                    const arrowClass = hasDescription ? 'arrow-icon active' : 'arrow-icon';
-
-                    projectsHTML += `
-                    <div class="slice-container">
-                        <div class="expirence-container">
+                        experienceContainer.innerHTML = `
+                            <div class="expirence-title">
+                                <img src="${exp.companyLogo}" alt="${exp.companyName} logo" class="company-logo">
+                                <div class="company-name">${exp.companyName}</div>
+                            </div>
                             <div class="expirence-position">
                                 <div class="role-data">
-                                    <img src="https://www.svgrepo.com/show/533324/code.svg" alt="" class="data-item-symbol">
-                                    <div class="job-role">${repo.name}</div>
+                                    <img src="https://www.svgrepo.com/show/533324/code.svg" alt="code icon" class="data-item-symbol">
+                                    <div class="job-role">${exp.position}</div>
                                     <div></div>
-                                    <div class="job-duration">Creation Date: ${formatDate(repo.created_at)}</div>
+                                    <div class="job-duration">${exp.duration}</div>
                                 </div>
-                                <img src="https://www.svgrepo.com/show/428133/down-arrow2.svg" height="16px"
-                                    style="filter: invert(1);" alt="" class="${arrowClass}">
+                                <img src="https://www.svgrepo.com/show/428133/down-arrow2.svg" height="16px" style="filter: invert(1);"
+                                    alt="arrow icon" class="arrow-icon">
                             </div>
-
-                            <div class="${descriptionClass}">
-                                <ul>
-                                    <li>${repo.description || 'No description available.'}</li>
-                                    <li>Last updated: ${formatDate(repo.updated_at)}</li>
-                                    <li><a href="${repo.html_url}" target="_blank" class="data-item-Link">View on GitHub</a></li>
-                                </ul>
-                                <div class="skills">
-                                    ${repo.language ? `<div class="skill-item">${repo.language}</div>` : ''}
-                                    ${repo.stargazers_count > 0 ? `<div class="skill-item">Stars: ${repo.stargazers_count}</div>` : ''}
-                                    ${repo.forks_count > 0 ? `<div class="skill-item">Forks: ${repo.forks_count}</div>` : ''}
-                                </div>
+                            <div class="job-description">
+                                ${descriptionHTML}
+                                ${skillsHTML}
                             </div>
-                        </div>
-                    </div>`;
-                });
-
-                container.innerHTML = projectsHTML;
-
-                // Add event listeners to the newly created elements
-                const expPositions = document.querySelectorAll('.expirence-position');
-                expPositions.forEach(position => {
-                    position.addEventListener('click', function () {
-                        const description = this.nextElementSibling;
-                        const arrow = this.querySelector('.arrow-icon');
-                        description.classList.toggle('active');
-                        arrow.classList.toggle('active');
+                        `;
+                        mainExperienceDiv.appendChild(experienceContainer);
                     });
-                });
-            }
 
-            // Call the render function
-            renderGitHubProjects();
+                    // Add event listeners for the accordion functionality AFTER elements are created
+                    const expPositions = document.querySelectorAll('#experience .expirence-position');
+                    expPositions.forEach(position => {
+                        position.addEventListener('click', function () {
+                            const description = this.nextElementSibling; // Should be .job-description
+                            const arrow = this.querySelector('.arrow-icon');
+
+                            if (description && description.classList.contains('job-description')) {
+                                description.classList.toggle('active');
+                            }
+                            if (arrow) {
+                                arrow.classList.toggle('active');
+                            }
+                        });
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching or processing experience data:', error);
+                    const mainExperienceDiv = document.getElementById('experience');
+                    if (mainExperienceDiv) {
+                        mainExperienceDiv.innerHTML = '<p style="color:red; text-align:center;">Could not load experience data.</p>';
+                    }
+                });
         });
     </script>
 
@@ -1093,7 +997,7 @@
             sendButton.disabled = true;
             sendButton.textContent = 'Sending...';
 
-            fetch('https://script.google.com/macros/s/AKfycbxQfnfRroeo-CJA8L-PKkC38fqQP0oTDlpfWnvnlSUyZcnjYZg9vLtE5D0-FBxQ7lJ2/exec', {
+            fetch('https://script.google.com/macros/s/AKfycbxnOvocka2sPZswrHA0MJkgCbpjPM2x_FSGZvwx80q-46oeQADkE54xAWp9wpAehSvt/exec', {
                 method: 'POST',
                 body: formData,
                 mode: 'no-cors'
