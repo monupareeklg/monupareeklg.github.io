@@ -876,6 +876,149 @@
         <!-- Static experience card content removed. Dynamic content will be loaded here. -->
     </div>
 
+
+
+    <div class="slice-container slashed-container">
+        <div class="section-change-slashes"></div>
+    </div>
+
+    <div id="projects" class="slice-container">
+        <div class="section-title">
+            Projects
+        </div>
+
+        <div class="github-render">
+            <div id="github-projects-container">
+                <div class="loading-indicator">Loading projects from GitHub...</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Function to fetch GitHub repositories with caching
+            async function fetchGitHubProjects() {
+                try {
+                    // Check if we have cached data and it's still valid (less than 1 day old)
+                    const cachedData = localStorage.getItem('githubReposCache');
+                    const cacheTimestamp = localStorage.getItem('githubReposCacheTimestamp');
+
+                    const now = new Date().getTime();
+                    const oneDayInMs = 24 * 60 * 60 * 1000; // 1 day in milliseconds
+
+                    // If we have valid cached data, use it
+                    if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp) < oneDayInMs)) {
+                        console.log('Using cached GitHub repositories data');
+                        return JSON.parse(cachedData);
+                    }
+
+                    // Otherwise fetch fresh data
+                    console.log('Fetching fresh GitHub repositories data');
+                    const response = await fetch('https://api.github.com/users/monupareeklg/repos?sort=updated&per_page=6');
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch repositories');
+                    }
+                    const repos = await response.json();
+
+                    // Cache the data
+                    localStorage.setItem('githubReposCache', JSON.stringify(repos));
+                    localStorage.setItem('githubReposCacheTimestamp', now.toString());
+
+                    return repos;
+                } catch (error) {
+                    console.error('Error fetching GitHub repositories:', error);
+                    // Try to use cached data even if it's older than 1 day in case of error
+                    const cachedData = localStorage.getItem('githubReposCache');
+                    if (cachedData) {
+                        console.log('Using cached data due to fetch error');
+                        return JSON.parse(cachedData);
+                    }
+                    return [];
+                }
+            }
+
+            // Function to format date
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit'
+                });
+            }
+
+            // Function to render repositories
+            async function renderGitHubProjects() {
+                const container = document.getElementById('github-projects-container');
+                const repos = await fetchGitHubProjects();
+
+                if (repos.length === 0) {
+                    container.innerHTML = '<div class="slice-container"><div class="expirence-container">No repositories found or error loading data.</div></div>';
+                    return;
+                }
+
+                let projectsHTML = '';
+
+                repos.forEach(repo => {
+                    // Extract topics/languages as skills
+                    let skills = [];
+                    if (repo.language) {
+                        skills.push(repo.language);
+                    }
+
+                    // Determine if this repo should be open by default based on description
+                    const hasDescription = repo.description && repo.description.trim() !== '';
+                    const descriptionClass = hasDescription ? 'job-description active' : 'job-description';
+                    const arrowClass = hasDescription ? 'arrow-icon active' : 'arrow-icon';
+
+                    projectsHTML += `
+                    <div class="slice-container">
+                        <div class="expirence-container">
+                            <div class="expirence-position">
+                                <div class="role-data">
+                                    <img src="https://www.svgrepo.com/show/533324/code.svg" alt="" class="data-item-symbol">
+                                    <div class="job-role">${repo.name}</div>
+                                    <div></div>
+                                    <div class="job-duration">Creation Date: ${formatDate(repo.created_at)}</div>
+                                </div>
+                                <img src="https://www.svgrepo.com/show/428133/down-arrow2.svg" height="16px"
+                                    style="filter: invert(1);" alt="" class="${arrowClass}">
+                            </div>
+
+                            <div class="${descriptionClass}">
+                                <ul>
+                                    <li>${repo.description || 'No description available.'}</li>
+                                    <li>Last updated: ${formatDate(repo.updated_at)}</li>
+                                    <li><a href="${repo.html_url}" target="_blank" class="data-item-Link">View on GitHub</a></li>
+                                </ul>
+                                <div class="skills">
+                                    ${repo.language ? `<div class="skill-item">${repo.language}</div>` : ''}
+                                    ${repo.stargazers_count > 0 ? `<div class="skill-item">Stars: ${repo.stargazers_count}</div>` : ''}
+                                    ${repo.forks_count > 0 ? `<div class="skill-item">Forks: ${repo.forks_count}</div>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                });
+
+                container.innerHTML = projectsHTML;
+
+                // Add event listeners to the newly created elements
+                const expPositions = document.querySelectorAll('.expirence-position');
+                expPositions.forEach(position => {
+                    position.addEventListener('click', function () {
+                        const description = this.nextElementSibling;
+                        const arrow = this.querySelector('.arrow-icon');
+                        description.classList.toggle('active');
+                        arrow.classList.toggle('active');
+                    });
+                });
+            }
+
+            // Call the render function
+            renderGitHubProjects();
+        });
+    </script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             fetch('exp.json')
@@ -971,11 +1114,11 @@
             <form id="reviewForm">
                 <label>Email</label>
                 <input type="email" name="email" id="email" placeholder="Enter your email" required>
-    
+
                 <label>Message</label>
                 <textarea name="message" id="message" cols="10" rows="1" placeholder="Enter your message"
                     required></textarea>
-    
+
                 <button type="submit">Send</button>
             </form>
         </div>
@@ -984,14 +1127,14 @@
     <script>
         document.getElementById('reviewForm').addEventListener('submit', function (event) {
             event.preventDefault();
-    
+
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
-    
+
             const formData = new URLSearchParams();
             formData.append("email", email);
             formData.append("message", message);
-    
+
             // Disable the button here
             const sendButton = document.querySelector('#reviewForm button[type="submit"]');
             sendButton.disabled = true;
@@ -1002,25 +1145,25 @@
                 body: formData,
                 mode: 'no-cors'
             })
-            .then(() => {
-                // Replace form with success message
-                const formContainer = document.getElementById('formContainer');
-                formContainer.innerHTML = `
+                .then(() => {
+                    // Replace form with success message
+                    const formContainer = document.getElementById('formContainer');
+                    formContainer.innerHTML = `
                     <div style="text-align: center; padding: 20px;">
                         <p style="color: #4CAF50; font-weight: bold; font-size: 1.5em; margin-bottom: 10px;">Message Sent Successfully! 🎉</p>
                         <p style="color: #808080; font-size: 1.1em;">Thank you for reaching out!</p>
                         <p style="color: #808080; font-size: 1.1em;">I'll get back to you as soon as possible.</p>
                     </div>`;
-            })
-            .catch(() => {
-                alert('Failed to send message. Please try again.');
-                // Re-enable the button if sending failed
-                sendButton.disabled = false;
-                sendButton.textContent = 'Send';
-            });
+                })
+                .catch(() => {
+                    alert('Failed to send message. Please try again.');
+                    // Re-enable the button if sending failed
+                    sendButton.disabled = false;
+                    sendButton.textContent = 'Send';
+                });
         });
     </script>
-    
+
 
 
 
