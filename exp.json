@@ -1,9 +1,31 @@
 [
     {
+        "companyName": "MemeChat Pvt Ltd",
+        "companyLogo": "memechat.png",
+        "position": "Full Stack Developer (Backend Focus)",
+        "duration": "Full Time | 09/2025 - Present",
+        "description": [
+            "Contributing to the development and optimization of MemeChat’s core backend systems built on Python and FastAPI.",
+            "Working on existing microservice architecture to improve performance, scalability, and fault tolerance.",
+            "Implementing efficient asynchronous task handling and communication through RabbitMQ.",
+            "Managing and optimizing MySQL databases for large-scale user and content data.",
+            "Collaborating with cross-functional teams to deliver high-quality backend features that support product growth and stability."
+        ],
+        "skills": [
+            "Python",
+            "FastAPI",
+            "RabbitMQ",
+            "MySQL",
+            "Microservices",
+            "Docker",
+            "Redis"
+        ]
+    },
+    {
         "companyName": "Technoloader Pvt Ltd",
         "companyLogo": "technoloader.png",
         "position": "Team Lead",
-        "duration": "Full Time | 09/2020 - present",
+        "duration": "Full Time | 07/2020 - 09/2025",
         "description": [
             "Lead a team of 10+ developers to build and maintain the company's flagship product, a comprehensive platform for managing and analyzing data in the financial services industry.",
             "Developed and maintained a custom CMS for the company's website, allowing for easy updates and management of content.",
